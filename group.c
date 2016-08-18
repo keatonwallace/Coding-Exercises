@@ -27,8 +27,15 @@ void generateList(struct node *head){
   return;
 }
 
-int sortList(int i, int j){
-  return i;
+//args an array of head nodes.
+//Pass by value if I care about preserving original lists.
+struct node *sortList(){
+  
+  //pick lowest of head nodes
+  //insert node into new list
+  //advance list that had that node
+  //repeat
+  return;
 }
 
 void displayList(struct node *head){
