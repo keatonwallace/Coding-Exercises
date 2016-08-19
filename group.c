@@ -8,6 +8,12 @@ struct node {
   struct node *next;
 };
 
+void pushNode(struct node *head, int val);
+void generateList(struct node *head);
+struct node *sortList(struct node *lists[], int len);
+void displayList(struct node *head);
+struct node *makeHead();
+
 //I am traversing the whole list every time which is inefficient
 void pushNode(struct node *head, int val){
   struct node *traverse = head;
@@ -36,11 +42,14 @@ void generateList(struct node *head){
 
 //args an array of head nodes.
 //Pass by value if I care about preserving original lists.
-struct node *sortList(int *lists, int len){
+struct node *sortList(struct node *lists[], int len){
   struct node *head;
   int i;
   int index=0;
   int min = lists[0]->x;
+  for(i=0; i<len; i++){
+    lists[i]=lists[i]->next;
+  }
   head=makeHead();
   for(i=0; i<len; i++){
     if(lists[i]->x<=min){
@@ -59,6 +68,10 @@ struct node *sortList(int *lists, int len){
 }
 
 void displayList(struct node *head){
+  if(head->next==NULL){
+    printf("Empty list\n");
+    return;
+  }
   head=head->next;
   while(head->next!=NULL){
     printf("%i\n",head->x);
@@ -86,6 +99,13 @@ int main(){
   struct node *heads[j];
   for(k=0; k<j; k++){
     heads[k]=makeHead();
+    generateList(heads[k]);
   }
+
+  displayList(sortList(heads, j));
   return 0;
 }
+
+
+//TODO: Get rid of head nodes
+
