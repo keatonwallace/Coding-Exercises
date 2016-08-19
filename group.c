@@ -2,11 +2,13 @@
 #include <stdlib.h>
 #include <time.h>
 
+//If I get around to changing it the value field could have a better name
 struct node {
   int x;
   struct node *next;
 };
 
+//I am traversing the whole list every time which is inefficient
 void pushNode(struct node *head, int val){
   struct node *traverse = head;
   while (traverse->next!=NULL){
@@ -35,13 +37,25 @@ void generateList(struct node *head){
 //args an array of head nodes.
 //Pass by value if I care about preserving original lists.
 struct node *sortList(int *lists, int len){
-  
+  struct node *head;
+  int i;
+  int index=0;
+  int min = lists[0]->x;
+  head=makeHead();
+  for(i=0; i<len; i++){
+    if(lists[i]->x<=min){
+      index=i;
+      min=lists[i]->x;
+    }
+  }
+  pushNode(head, lists[index]->x);
+  lists[index]=lists[index]->next;
   //pick lowest of head nodes
   //insert node into new list
   //advance list that had that node
   //repeat
   
-  return;
+  return head;
 }
 
 void displayList(struct node *head){
