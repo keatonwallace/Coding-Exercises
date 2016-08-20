@@ -46,24 +46,35 @@ struct node *sortList(struct node *lists[], int len){
   struct node *head;
   int i;
   int index=0;
-  int min = lists[0]->x;
+
   for(i=0; i<len; i++){
-    lists[i]=lists[i]->next;
+    lists[i]=lists[i]->next;//advance past head nodes
   }
+  int min = lists[0]->x;//ignore the head node
   head=makeHead();
-  for(i=0; i<len; i++){
-    if(lists[i]->x<=min){
-      index=i;
-      min=lists[i]->x;
+  printf("about to sort\n");
+  while(lists[0]!=NULL){
+    printf("min is %i \n", min);
+    for(i=0; i<len; i++){
+      printf("lists[%i]->x is %i ", i, lists[i]->x);
+      if(lists[i]->x < min){
+	index=i;
+	min=lists[i]->x;
+      }
     }
-  }
-  pushNode(head, lists[index]->x);
-  lists[index]=lists[index]->next;
-  //pick lowest of head nodes
-  //insert node into new list
-  //advance list that had that node
-  //repeat
-  
+    printf("pushing node %i\n", min);
+    pushNode(head, min);
+    if(lists[index]->next!=NULL){
+      lists[index]=lists[index]->next;
+    }
+    else{
+      printf("here\n");
+      break;
+    }
+    if(lists[index]->x!=NULL){
+      min=lists[index]->x;
+    }
+    }
   return head;
 }
 
@@ -101,11 +112,14 @@ int main(){
     heads[k]=makeHead();
     generateList(heads[k]);
   }
-
+  printf("\n");
+  displayList(heads[0]);
+  displayList(heads[1]);
   displayList(sortList(heads, j));
   return 0;
 }
 
 
 //TODO: Get rid of head nodes
-
+//TODO: Solve for 2 lists
+//TODO: Solve for n lists
