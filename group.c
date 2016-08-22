@@ -64,17 +64,25 @@ struct node *sortList(struct node *lists[], int len){
     }
     printf("pushing node %i\n", min);
     pushNode(head, min);
-    if(lists[index]->next!=NULL){
-      lists[index]=lists[index]->next;
-    }
-    else{
-      printf("here\n");
-      break;
-    }
-    if(lists[index]->x!=NULL){
+    lists[index]=lists[index]->next;
+    printf("where is the beef\n");
+    if(lists[index]!=NULL){
       min=lists[index]->x;
     }
     }
+    
+  if(lists[0]==NULL){
+    while(lists[1]!=NULL){
+      pushNode(head, lists[1]->x);
+      lists[1]=lists[1]->next;
+    }
+  }
+  else{
+    while(lists[0]!=NULL){
+      pushNode(head, lists[0]->x);
+      lists[0]=lists[0]->next;
+    }
+  }
   return head;
 }
 
