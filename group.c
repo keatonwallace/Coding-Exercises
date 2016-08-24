@@ -30,8 +30,9 @@ struct node *pushNode(struct node *head, int val){
   return newNode;
 }
 
-//ARGS: List
-
+//ARGS: None
+//RETURNS: Pointer to head node of list
+//ACTION: Creates a semi-random sorted list
 struct node *generateList(){
   int j;
   int r;
@@ -46,8 +47,9 @@ struct node *generateList(){
   return head;
 }
 
-//args an array of head nodes.
-//Pass by value if I care about preserving original lists.
+//ARGS: Array of head nodes.
+//RETURNS: Head node of sorted list
+//ACTION: Sorts sorted lists into a single list
 struct node *sortList(struct node *lists[], int len){
   struct node *head;
   struct node *last;
@@ -78,6 +80,9 @@ struct node *sortList(struct node *lists[], int len){
   return head;
 }
 
+//ARGS: Head node of list
+//RETURNS: None
+//ACTION: Prints the contents of each node
 void displayList(struct node *head){
   if(head==NULL){
     printf("Empty list\n");
@@ -91,6 +96,9 @@ void displayList(struct node *head){
   return;
 }
 
+//ARGS: None
+//RETURNS: Pointer to head node
+//ACTION: Creates a new list
 struct node *makeHead(){
   struct node *i;
   i = malloc(sizeof(struct node));
@@ -102,7 +110,6 @@ struct node *makeHead(){
 int main(){
   int j;
   int k;
-  
   srand(time(NULL));
   printf("How many lists would you like?\n");
   scanf("%i", &j);
@@ -111,8 +118,6 @@ int main(){
     heads[k]=generateList();
   }
   printf("\n");
-  displayList(heads[0]);
-  displayList(heads[1]);
   displayList(sortList(heads, j));
   return 0;
 }
